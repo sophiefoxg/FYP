@@ -9,3 +9,6 @@ creates metadata file that shows distance between interaction
 
 
 ## slurm scripts for RNA-seq processing ##
+# RNA-esc
+# using provided RNA seq data QC, trim and multi QC revealed : GSM723776 dataset to be better
+#justification: ERR031629_trim is problematic:36% of reads failed QC
