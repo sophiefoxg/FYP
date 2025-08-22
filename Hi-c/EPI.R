@@ -52,7 +52,7 @@ hist(log10(calculateDistances(po_esc.gi)), xlab = "Distance log10(Mb)", ylab= "F
 
 
 #adding in hits from chip-seq data
-setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/esc/K27ac/broadpeaks")
+setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/esc/broadpeaks/")
 if (!requireNamespace("rtracklayer", quietly = TRUE)) {
   BiocManager::install("rtracklayer")
 }
@@ -63,7 +63,7 @@ library(GenomicRanges)
 
 #broad peaks
 setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/esc/K27ac/broadpeaks")
-esc_broad<-import("H3K27ac.bed")
+esc_broad<-import("broadpeaksesc.bed ")
 head(esc_broad)
 
 hits_escbroad<-findOverlaps(anchorTwo(po_esc.gi),esc_broad)
@@ -773,12 +773,12 @@ head(po_flc.gi)
 # distance between promoter other interactions, using anchor1 and anchor 2
 summary(calculateDistances(po_flc.gi))
 hist(log10(calculateDistances(po_flc.gi)), xlab = "Distance log10(Mb)", ylab= "Frequency", main = "Promoter-Other Distance (FLC)" )
-
-####define enhancers
+#######double check
+####define enhancers FROM HERE
 library(rtracklayer)
 #broad peaks
-setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/flc/K27ac/broadpeaks")
-flc_broad<-import("H3K27ac.bed")
+setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/flc/broadpeaks/")
+flc_broad<-import("flcbroad.bed")
 hits_flcbroad<-findOverlaps(anchorTwo(po_flc.gi),flc_broad)
 po_flc.gi$anchor2.node.class[queryHits(hits_flcbroad)] = "enhancer"
 table(po_flc.gi$anchor2.node.class)
@@ -813,7 +813,7 @@ setwd("/mnt/clusters/admiral/data/c2007523/FYP/RNA/flc/")
 TPMflc<-read.delim("TPMflc_table.txt", header=TRUE)
 matchRNA<-match(pe_flc.gi$anchor1.promoter.id,TPMflc$Geneid)
 pe_flc.gi$TPM<-TPMflc$TPM[matchRNA]
-head(pe_flc.gi)
+length(pe_flc.gi)
 
 #save
 
