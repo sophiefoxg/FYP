@@ -62,8 +62,8 @@ library(GenomicRanges)
 
 
 #broad peaks
-setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/esc/K27ac/broadpeaks")
-esc_broad<-import("broadpeaksesc.bed ")
+setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/esc/broadpeaks")
+esc_broad<-import("broadpeaksesc.bed")
 head(esc_broad)
 
 hits_escbroad<-findOverlaps(anchorTwo(po_esc.gi),esc_broad)
@@ -129,6 +129,8 @@ table(pe_esc.gi$anchor2.node.class)
  length(unique(pe_esc.gi$anchor1.promoter.id))
  df <- as.data.frame(anchorTwo(pe_esc.gi))
  length(unique(paste(df$seqnames, df$start, df$end, sep = "_")))
+ min(pe_esc.gi$distance)
+ max(pe_esc.gi$distance)
  
 x2 = read.delim("/mnt/clusters/admiral/data/c2007523/FYP/Hi-c/ESC_promoter_promoter_significant_interactions.txt")
 
@@ -773,8 +775,8 @@ head(po_flc.gi)
 # distance between promoter other interactions, using anchor1 and anchor 2
 summary(calculateDistances(po_flc.gi))
 hist(log10(calculateDistances(po_flc.gi)), xlab = "Distance log10(Mb)", ylab= "Frequency", main = "Promoter-Other Distance (FLC)" )
-#######double check
-####define enhancers FROM HERE
+
+#define enhancers
 library(rtracklayer)
 #broad peaks
 setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/flc/broadpeaks/")
@@ -821,6 +823,8 @@ setwd("/mnt/clusters/admiral/data/c2007523/FYP/Hi-c")
 #saveRDS(pe_flc.gi, file="FLC_samples_positive.rds")
 pe_flc.gi <- readRDS("FLC_samples_positive.rds")
 
+min(pe_flc.gi$distance)
+max(pe_flc.gi$distance)
 
 # Read in FLC promoter-promoter interactions
 x2_flc <- read.delim("/mnt/clusters/admiral/data/c2007523/FYP/Hi-c/FLC_promoter_promoter_significant_interactions.txt")
@@ -1335,13 +1339,16 @@ pe_flc.gi <- readRDS("FLC_samples_positive.rds")
 negative_gi_flc <- readRDS("negative_interactions_flc.rds")
 negative_no_dis_flc<-readRDS("negative_interactions_no_distance_flc.rds")
 
-
+tpm
 
 #tpm for interacting vs all
 all_ESC <- TPMesc$TPM
-esc_promoters <- unique(pe_esc.gi$anchor1.promoter.id)
-esc_TPM <- TPMesc$TPM[match(esc_promoters, TPMesc$Geneid)]
+esc_epi_promoters <- unique(pe_esc.gi$anchor1.promoter.id)
+esc_TPM <- TPMesc$TPM[match(esc_epi_promoters, TPMesc$Geneid)]
+esc_TPM[is.na(esc_TPM)] <- 0
 
+median(esc_TPM)
+median(all_ESC)
 # calculate y_max for annotation
 y_max <- max(log2(c(all_ESC, esc_TPM) + 1), na.rm = TRUE)
 
@@ -1366,9 +1373,12 @@ t.test(log2(all_ESC+1), log2(esc_TPM+1))
 ### FLC ###
 
 all_FLC <- TPMflc$TPM
-flc_promoters <- unique(pe_flc.gi$anchor1.promoter.id)
-flc_TPM <- TPMflc$TPM[match(flc_promoters, TPMflc$Geneid)]
+flc_epi_promoters <- unique(pe_flc.gi$anchor1.promoter.id)
+flc_TPM <- TPMflc$TPM[match(flc_epi_promoters, TPMflc$Geneid)]
+flc_TPM[is.na(flc_TPM)] <- 0
 
+median(flc_TPM)
+median(all_FLC)
 # calculate y_max for annotation
 y_max_flc <- max(log2(c(all_FLC, flc_TPM) + 1), na.rm = TRUE)
 

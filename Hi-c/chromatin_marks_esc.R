@@ -250,8 +250,8 @@ length(negative_gi)
 
 
 # 
-setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/esc/K27ac/broadpeaks")
-h3k27ac<-import("H3K27ac_signal.bed")
+setwd("/mnt/clusters/admiral/data/c2007523/FYP/chip/esc/broadpeaks")
+h3k27ac<-import("ESC_H3K27ac_signal.bed")
 
 #anchor one
 ov <- findOverlaps(anchorOne(pe_esc.gi), h3k27ac)
@@ -294,7 +294,7 @@ mean(negative_gi$H3K27acA2)
 sum(negative_gi$H3K27acA2 > 0, na.rm = TRUE)
 sum(negative_gi$H3K27acA2 == 0, na.rm = TRUE)
 length(negative_gi)
-
+length(pe_esc.gi)
 
 
 
@@ -337,15 +337,16 @@ positives.df<-positives.df[,!(names(positives.df) %in% c("distance"))]
 combined.df <- rbind(positives.df, negatives.df)
 head(combined.df)
 #one had 0 expression so just removed it
-colSums(is.na(combined.df))
-combined.df<-na.omit(combined.df)
+
+nrow(combined.df)
 
 
 #save
 setwd("/mnt/clusters/admiral/data/c2007523/FYP/Hi-c")
-write.table(combined.df, file = "ESC_combined_M2.tsv", sep = "\t", quote = FALSE,row.names = FALSE)
+#write.table(combined.df, file = "ESC_combined_M2.tsv", sep = "\t", quote = FALSE,row.names = FALSE)
 #read in if necessary
 combined.df <- read.delim("ESC_combined_M2.tsv", sep = "\t", header = TRUE)
+combined.df<-na.omit(combined.df)
 #####random forests ####
 library(randomForest)
 library(PRROC)

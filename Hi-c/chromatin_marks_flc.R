@@ -338,15 +338,14 @@ combined.df <- rbind(positives.df, negatives.df)
 head(combined.df)
 #one had 0 expression so just removed it
 colSums(is.na(combined.df))
-combined.df<-na.omit(combined.df)
-
 
 #save
 setwd("/mnt/clusters/admiral/data/c2007523/FYP/Hi-c")
-write.table(combined.df, file = "FLC_combined_M2.tsv", sep = "\t", quote = FALSE,row.names = FALSE)
+#write.table(combined.df, file = "FLC_combined_M2.tsv", sep = "\t", quote = FALSE,row.names = FALSE)
 #read in if necessary
 combined.df <- read.delim("FLC_combined_M2.tsv", sep = "\t", header = TRUE)
-
+nrow(combined.df)
+combined.df<-na.omit(combined.df)
 ##### random forests ####
 library(randomForest)
 library(PRROC)
@@ -391,3 +390,4 @@ pr <- pr.curve(scores.class0 = all_predictions[all_labels == 1],
 plot(pr)
 
 varImpPlot(model)
+
