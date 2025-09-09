@@ -1,4 +1,4 @@
-# FYP predicting enhancer promoter interactions 
+# FYP Predicting enhancer promoter interactions #
 
 ## ./Hi-C
 ### EPI.R: Identifying true EPIs and sampling negatives
