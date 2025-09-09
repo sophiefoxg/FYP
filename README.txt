@@ -1,14 +1,14 @@
 # FYP predicting enhancer promoter interactions 
 
-# ./Hi-C
-## EPI.R: Identifying true EPIs and sampling negatives
+## ./Hi-C
+### EPI.R: Identifying true EPIs and sampling negatives
 Required to clean PCHi-C data from Schoenfelder et al. (2015) in ./Hi-c folder:
 
 - `ESC_promoter_other_significant_interactions.txt`  
 - `ESC_promoter_promoter_significant_interactions.txt`  
 - `FLC_promoter_other_significant_interactions.txt`  
 - `FLC_promoter_promoter_significant_interactions.txt`  
-## Sampling
+### Sampling
 Two types of sampling:  
 1. Not matching for distance  
 2. Matched for distance  
