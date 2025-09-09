@@ -1,4 +1,4 @@
-# FYP Predicting enhancer promoter interactions #
+# Differential Gene Expression Analysis #
 
 ## ./Hi-C
 ### EPI.R: Identifying true EPIs and sampling negatives
