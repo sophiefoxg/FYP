@@ -1,4 +1,4 @@
-# EPI.R: Identifying true EPIs and sampling negatives
+#EPI.R: Identifying true EPIs and sampling negatives
 
 Required to clean PCHi-C data from Schoenfelder et al. (2015) in this folder:
 
@@ -9,7 +9,7 @@ Required to clean PCHi-C data from Schoenfelder et al. (2015) in this folder:
 
 ---
 
-## Sampling
+##Sampling
 
 Two types of sampling:  
 1. Not matching for distance  
