@@ -122,7 +122,7 @@ Compares the final models performance between esc and flc cells
 
 ### Plots.R
 #### found in: ./Hi-c
-Plots the majority of figures seen in the project report
+Plots some figures seen in the project report
 
 
 ### M2vsM3.R
