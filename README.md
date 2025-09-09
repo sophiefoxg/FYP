@@ -28,27 +28,37 @@ fastp v0.23.4, FastQC v0.12.1, STAR v2.7, subread/featureCounts v2.0.6
 
 
 ## Pipeline for analysing chip-sequencing data as histone marks in esc and flc:
-#### found in ./chip/esc
-Chip-seq data available at:
-ESC: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE29184
-FLC:GSE153563
 ### Scripts
 1QCP.slurm  
 2align.slurm 
 3peaks.slurm
+#### found in ./chip/esc
+
+##### data sources:
+Chip-seq data available at:
+ESC: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE29184
+FLC:GSE153563
+
 #### Requirements:
 FastQC v0.12.1, fastp v0.23.4, Bowtie2 v2.5.2, samtools v1.19.2, MACS2 v2.2.8, bedtools v2.31.1
 
+
+
+
+
 ## CpG
 CpG island annotation step:done in command line
+CpG island annotations were downloaded from the UCSC Genome Browser (Karolchik et al., 2004) for the mm9 assembly. Coordinates were extracted 
 #### Requirements
 bedtools v2.31.1
 
 
 # Model 1
 
+
+### EPI.R
+Identifying true EPIs and sampling negatives
 ### found in ./Hi-C
-### EPI.R: Identifying true EPIs and sampling negatives
 Required to clean PCHi-C data from Schoenfelder et al. (2015) in ./Hi-c folder:
 
 - `ESC_promoter_other_significant_interactions.txt`  
@@ -60,17 +70,24 @@ Two types of sampling:
 1. Not matching for distance  
 2. Matched for distance  
 
-##  Results for Model 1 and example of LOCO
 #### Requirements
 - BiocManager v1.30.25  , GenomicInteractions v1.40.0 (Harmston et al. 2015) , GenomicRanges v1.58.0 (Lawrence et al. 2013) , IRanges v2.40.0 (Lawrence et al. 2013),  rtracklayer v1.66.0 (Lawrence et al. 2009), randomForest v4.7-1.1 (Liaw & Wiener 2002)  
 ggplot2 v3.5.1 (Wickham 2016), cowplot v1.1.3 (Wilke 2020), pROC v1.18.5 (Robin et al. 2011), PRROC v1.3.1 (Grau et al. 2015) 
+
+#### descript_data.R
+### found in ./Hi-C
+Plots all models seen in the project report and summarises summary of datasets data seen in table 2. Aswell as GoEnrichment of shared vs unique PEIs in ESCs and FLCs
+
+#### Required Packages: 
+grid, VennDiagram, clusterProfiler, org.Mm.eg.db, enrichplot
 
 
 
 # Model 2
 
-#### found in: ./Hi-c
+
 ### chromatin_marks_esc.R
+#### found in: ./Hi-c
 Overlaps genomic coordinates of Positives and negatives with histone marks found in pre-processing steps, resulting in signal values for each promoter, enhancer and "negative"
 
 ##### Required packages (plus EPI.R packages):
@@ -79,8 +96,9 @@ IRanges v2.4
 
 # Model 3
 
-#### found in: ./Hi-c
+
 ### motif_esc.R
+#### found in: ./Hi-c
 Identifies motifs and calculates similarity scores between positive and negative set
 
 ##### Required packages (plus EPI.R packages):
@@ -88,24 +106,26 @@ TFBSTools v1.44, lsa v0.73, and the mm9 genome v1.4.
 
 
 # Final Model
-#### found in: ./Hi-c
 ### Final_model.R
+#### found in: ./Hi-c
 Integrates all features and plots all models used in the report
 ##### Required packages = EPI.R packages
 
 
 # Cross Cell Type
-#### found in: ./Hi-c
 ### cell_type_comparison.R
+#### found in: ./Hi-c
 Compares the final models performance between esc and flc cells
 ##### Required packages = EPI.R packages
 
 # Additional Scripts:
-#### found in: ./Hi-c
+
 ### Plots.R
+#### found in: ./Hi-c
 Plots the majority of figures seen in the project report
 
-#### found in: ./Hi-c
+
 ### M2vsM3.R
+#### found in: ./Hi-c
 the beginning of error analysis for model 2 and 3
 
